@@ -1,0 +1,142 @@
+.containerNewPres {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.cont1 {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  margin-left: 100px;
+}
+
+.containerNewPres h2 {
+  margin-top: 5%;
+}
+
+.inputStock {
+  padding: 5px;
+  border-radius: 6px;
+}
+
+.avaibleProductsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin: 20px;
+}
+
+.containerTable {
+  max-width: 700px;
+  max-height: 350px;
+  overflow-y: auto;
+  margin-left: 20px;
+  overflow-x: hidden;
+}
+
+.containerTable thead th {
+  position: sticky;
+  top: 0;
+}
+
+.containerTable td:first-child {
+  max-width: 150px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.containerTable td {
+  white-space: normal;
+}
+
+.tableAvaible {
+  width: 70%;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+.tableAvaible th {
+  background: #111111;
+  color: white;
+  padding: 15px 30px;
+  text-align: left;
+}
+
+.tableAvaible td {
+  padding: 15px 30px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.rowAvaible:hover {
+  background: #f5f5f5;
+}
+
+.addedProductsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin: 20px;
+}
+
+.btnSaveBudget {
+  width: fit-content;
+  padding: 5px 15px;
+  background-color: #1f1f1f;
+  color: #f5f5f5;
+  border-radius: 6px;
+  transition: 0.3s;
+  margin: 20px;
+}
+
+.btnSaveBudget:hover {
+  background-color: #2a2a2a;
+}
+
+.cont2 {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.contSearchBar {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.searchFormPres {
+  display: flex;
+  width: 80%;
+  gap: 10px;
+}
+
+.searchInputPres {
+  width: 100%;
+  height: 30px;
+  border-radius: 6px;
+}
+
+.searchButtonPres {
+  width: fit-content;
+  padding: 5px 15px;
+  background-color: #1f1f1f;
+  color: #f5f5f5;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.searchButtonPres:hover {
+  background-color: #2a2a2a;
+}

@@ -1,0 +1,98 @@
+import express from "express";
+import multer from "multer";
+import fs from "fs";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { isAuth } from "../middleware/auth.js";
+import Product from "../models/Product.js";
+
+const router = express.Router();
+const upload = multer({ dest: "uploads/" });
+
+// Inicialización (Asegúrate que el .env esté cargado en app.js)
+
+router.get("/importar", isAuth, (req, res) => {
+  res.render("importarProductos");
+});
+
+router.post(
+  "/importar/procesar",
+  isAuth,
+  upload.single("listaImagen"),
+  async (req, res) => {
+    if (!req.file) return res.status(400).send("No se subió ninguna imagen.");
+    const pathImagen = req.file.path;
+
+    try {
+      // 1. Inicializar la API
+      const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+      // 2. Usar el modelo 1.5-flash (es el estándar actual)
+      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+      // 3. Preparar la imagen
+      const imageParts = [
+        {
+          inlineData: {
+            data: fs.readFileSync(pathImagen).toString("base64"),
+            mimeType: req.file.mimetype,
+          },
+        },
+      ];
+
+      const prompt =
+        "Analiza esta imagen y extrae los productos en un array JSON con campos: nombre, precio y stock. Si no hay nada, devuelve [].";
+
+      // 4. Llamada simplificada
+      const result = await model.generateContent([prompt, ...imageParts]);
+      const response = await result.response;
+      const textoJson = response.text();
+
+      // 5. Limpiar y procesar
+      const jsonLimpio = textoJson
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
+        .trim();
+      let productosExtraidos = JSON.parse(jsonLimpio);
+
+      if (fs.existsSync(pathImagen)) fs.unlinkSync(pathImagen);
+
+      res.render("confirmarImportacion", { productos: productosExtraidos });
+    } catch (error) {
+      console.error("ERROR DETALLADO DE GOOGLE:", error);
+      if (fs.existsSync(pathImagen)) fs.unlinkSync(pathImagen);
+
+      // Si vuelve a dar 404, el problema es la API KEY o el modelo no está activo en tu cuenta
+      res
+        .status(500)
+        .send(
+          "Error de comunicación con la IA. Verifica tu API Key en el archivo .env",
+        );
+    }
+  },
+);
+
+router.post("/importar/confirmar", isAuth, async (req, res) => {
+  try {
+    const { productos } = req.body;
+    if (!productos) return res.redirect("/productos");
+
+    // Convertimos a array si viene un solo objeto y mapeamos tipos
+    const lista = Array.isArray(productos)
+      ? productos
+      : Object.values(productos);
+
+    const productosFinal = lista.map((p) => ({
+      nombre: p.nombre,
+      precio: Number(p.precio) || 0,
+      stock: Number(p.stock) || 0,
+    }));
+
+    await Product.insertMany(productosFinal);
+    res.redirect("/productos?importado=success");
+  } catch (error) {
+    console.error("Error al guardar:", error);
+    res.status(500).send("Error al guardar en la base de datos.");
+  }
+});
+
+export default router;

@@ -1,0 +1,49 @@
+/* Presupuestos */
+
+.table {
+  width: 70%;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+.table th {
+  background: #111111;
+  color: white;
+  padding: 15px 30px;
+  text-align: left;
+}
+
+.table td {
+  padding: 15px 30px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.row:hover {
+  background: #f5f5f5;
+}
+
+.btnShow {
+  background: #1f1f1f;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.btnPDF {
+  background: #666666;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.btnDelete {
+  background: #666666;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.btnDelete:hover {
+  background-color: red;
+}

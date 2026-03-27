@@ -1,0 +1,97 @@
+<div class="containerProducts">
+
+  <!-- Barra superior -->
+
+  <div class="containerSearchBar">
+
+    <form action="/productos" method="GET" class="searchForm">
+
+      <input
+        type="text"
+        name="search"
+        placeholder="🔍 Buscar producto o marca.."
+        value="{{search}}"
+        class="searchInput"
+      />
+
+      <button class="searchButton">
+        Buscar
+      </button>
+
+    </form>
+
+  </div>
+
+  <!-- Tabla -->
+
+  <div>
+
+    <div class="containerTableProduct">
+
+      <table class="productTableProduct">
+
+        <thead>
+
+          <tr>
+            <th>Producto</th>
+            <th>Marca</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acciones</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          {{#each productos}}
+
+            <tr class="rowProduct">
+
+              <td>{{this.nombre}}</td>
+              <td>{{this.marca}}</td>
+              <td>$ {{this.precio}}</td>
+
+              <td>
+
+                {{#if this.stock}}
+                  <span>
+                    {{this.stock}}
+                  </span>
+                {{else}}
+                  <span>
+                    Sin stock
+                  </span>
+                {{/if}}
+
+              </td>
+
+              <td class="actions">
+
+                <a href="/productos/editar/{{this._id}}" class="btnEditProduct">
+                  Editar
+                </a>
+
+                <a
+                  href="/productos/eliminar/{{this._id}}"
+                  class="btnDeleteProduct"
+                  onclick="return confirm('¿Eliminar Producto?')"
+                >
+                  Eliminar
+                </a>
+
+              </td>
+
+            </tr>
+
+          {{/each}}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

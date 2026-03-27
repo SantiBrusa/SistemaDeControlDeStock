@@ -1,0 +1,17 @@
+node_modules/
+createUser.js
+uploads/
+.env
+
+# Logs de errores
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos del Sistema Operativo
+.DS_Store
+Thumbs.db
+
+# Configuración de editores (Opcional, pero recomendado)
+.vscode/
+.idea/

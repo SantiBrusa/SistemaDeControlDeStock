@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Importar Productos desde Foto/PDF</h2>
+  <p>Sube una foto de tu lista de precios o un remito de proveedor.</p>
+
+  <form
+    action="/importar/procesar"
+    method="POST"
+    enctype="multipart/form-data"
+    class="form-import"
+  >
+    <div class="field">
+      <label>Selecciona la imagen o PDF:</label>
+      <input
+        type="file"
+        name="listaImagen"
+        accept="image/*,application/pdf"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btnForm">
+      Procesar con IA
+    </button>
+  </form>
+</div>

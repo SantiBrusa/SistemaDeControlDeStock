@@ -1,0 +1,69 @@
+<div class="container">
+  <h2>Confirmar Productos Extraídos</h2>
+  <p>Revisa que los datos sean correctos antes de guardarlos definitivamente.</p>
+
+  <form action="/importar/confirmar" method="POST">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre del Producto</th>
+          <th>Precio ($)</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each productos}}
+          <tr>
+            <td>
+              <input
+                type="text"
+                name="productos[{{@index}}][nombre]"
+                value="{{this.nombre}}"
+                class="input-edit"
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                step="0.01"
+                name="productos[{{@index}}][precio]"
+                value="{{this.precio}}"
+                class="input-edit"
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                name="productos[{{@index}}][stock]"
+                value="{{this.stock}}"
+                class="input-edit"
+              />
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <div class="actions">
+      <a href="/importar" class="btnCancel">Cancelar</a>
+      <button type="submit" class="btnForm">
+        Guardar en Base de Datos
+      </button>
+    </div>
+  </form>
+</div>
+
+<style>
+  .input-edit {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+</style>

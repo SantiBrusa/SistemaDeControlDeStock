@@ -1,0 +1,31 @@
+<div class="containerLogin">
+  <div class="containerContent1">
+    <h2>Login</h2>
+
+    <form action="/login" method="POST" class="form">
+      <div class="field">
+        <input type="text" name="username" placeholder="Usuario" required />
+      </div>
+      <div class="field">
+        <input
+          type="password"
+          name="password"
+          placeholder="Contraseña"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <button type="submit" class="btnForm">Ingresar</button>
+      </div>
+
+    </form>
+
+    {{#if error}}
+      <p style="color:red">{{error}}</p>
+    {{/if}}
+  </div>
+  <div class="containerContent2">
+    <img src="/img/motosprint.jpeg" alt="" />
+  </div>
+</div>

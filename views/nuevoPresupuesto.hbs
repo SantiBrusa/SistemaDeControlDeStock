@@ -1,0 +1,125 @@
+<form
+  action="/presupuestos/nuevo"
+  method="POST"
+  id="formPresupuesto"
+  class="containerNewPres"
+>
+  <div class="cont1">
+    <h2>Nuevo Presupuesto</h2>
+
+    <div class="field">
+      <label>Cliente</label>
+      <input type="text" name="cliente" required />
+    </div>
+
+    <div class="field">
+      <label>Domicilio</label>
+      <input type="text" name="domicilio" />
+    </div>
+  </div>
+
+  <div class="avaibleProductsContainer">
+    <h3>Productos disponibles</h3>
+
+    <div class="contSearchBar">
+      <div class="searchFormPres">
+        <input
+          type="text"
+          id="inputBusquedaPres"
+          placeholder="🔍 Buscar producto o marca.."
+          class="searchInputPres"
+        />
+        <button type="button" class="searchButtonPres">
+          Buscar
+        </button>
+      </div>
+    </div>
+
+    <div class="containerTable">
+      <table class="tableAvaible">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          {{#each productos}}
+
+            <tr class="rowAvaible">
+
+              <td>{{this.nombre}}</td>
+
+              <td>${{this.precio}}</td>
+
+              <td>{{this.stock}}</td>
+
+              <td>
+                <input
+                  type="number"
+                  id="cantidad-{{@index}}"
+                  min="1"
+                  max="{{this.stock}}"
+                  value="1"
+                  class="inputStock"
+                />
+              </td>
+
+              <td>
+                <button
+                  type="button"
+                  onclick="agregarProducto('{{this.nombre}}', {{this.precio}}, {{this.stock}}, {{@index}})"
+                  class="btnForm"
+                >
+                  Añadir
+                </button>
+              </td>
+
+            </tr>
+
+          {{/each}}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="addedProductsContainer">
+    <h3>Productos añadidos</h3>
+    <div class="containerTable">
+      <table class="table">
+
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>SubTotal</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+
+        <tbody id="tablaAñadidos">
+
+        </tbody>
+
+      </table>
+    </div>
+    <br />
+
+  </div>
+  <div class="cont2">
+    <h3>Total: $<span id="total">0</span></h3>
+    <button type="submit" class="btnSaveBudget">
+      Guardar Presupuesto
+    </button>
+  </div>
+
+</form>
+
+<script src="/js/presupuesto.js"></script>

@@ -1,0 +1,46 @@
+<div class="container">
+  <h2>Presupuestos</h2>
+
+  <a href="/presupuestos/nuevo" class="addProduct">Nuevo presupuesto</a>
+
+  <table class="table">
+
+    <tr class="row">
+      <th>Cliente</th>
+      <th>Total</th>
+      <th>Acciones</th>
+    </tr>
+
+    {{#each presupuestos}}
+
+      <tr class="row">
+
+        <td>{{this.cliente}}</td>
+        <td>{{this.total}}</td>
+
+        <td class="actions">
+
+          <a href="/presupuestos/ver/{{this._id}}" class="btnShow">
+            Ver
+          </a>
+
+          {{!-- <a href="/presupuestos/pdf/{{this._id}}" class="btnPDF">
+            PDF
+          </a> --}}
+
+          <a
+            href="/presupuestos/eliminar/{{this._id}}"
+            class="btnDelete"
+            onclick="return confirm('¿Eliminar presupuesto?')"
+          >
+            Eliminar
+          </a>
+
+        </td>
+
+      </tr>
+
+    {{/each}}
+
+  </table>
+</div>

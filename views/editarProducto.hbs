@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>Modificar</h2>
+
+  <form action="/productos/editar/{{producto._id}}" method="POST" class="form">
+    <div class="field">
+      <label>Nombre</label>
+      <input type="text" name="nombre" value="{{producto.nombre}}" />
+    </div>
+    <div class="field">
+      <label>Marca</label>
+      <input type="text" name="marca" value="{{producto.marca}}" />
+    </div>
+    <div class="field">
+      <label>Precio</label>
+      <input type="number" name="precio" value="{{producto.precio}}" />
+    </div>
+    <div class="field">
+      <label>Stock</label>
+      <input type="number" name="stock" value="{{producto.stock}}" />
+    </div>
+    <div class="field">
+      <button type="submit" class="btnForm">Actualizar</button>
+      <a href="/productos" class="back">Volver</a>
+    </div>
+  </form>
+
+</div>
