@@ -109,9 +109,9 @@
   .c7 {
     position: fixed;
     bottom: 0;
-    right: 0; /* Lo pegamos al borde derecho */
-    width: 60%; /* Le damos un ancho limitado (puedes ajustarlo) */
-    text-align: right; /* Alineamos el texto de adentro a la derecha */
+    right: 0;
+    width: 60%;
+    text-align: right;
     background-color: white;
     padding-top: 10px;
     border-top: 1px solid #000;

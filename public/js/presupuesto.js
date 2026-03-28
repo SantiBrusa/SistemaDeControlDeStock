@@ -85,18 +85,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   inputBusqueda.addEventListener("keyup", function () {
     const valorBusqueda = this.value.toLowerCase();
-    // Seleccionamos todas las filas de la tabla de "disponibles"
+
     const filas = document.querySelectorAll(
       ".avaibleProductsContainer .tableAvaible tbody tr",
     );
 
     filas.forEach((fila) => {
-      // Obtenemos el texto de la primera celda (Nombre del producto)
       const nombreProducto = fila
         .querySelector("td:first-child")
         .textContent.toLowerCase();
 
-      // Si el nombre coincide con la búsqueda, se muestra, si no, se oculta
       if (nombreProducto.includes(valorBusqueda)) {
         fila.style.display = "";
       } else {

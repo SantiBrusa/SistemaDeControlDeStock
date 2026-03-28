@@ -38,19 +38,15 @@ router.post("/presupuestos/nuevo", isAuth, async (req, res) => {
   try {
     const { cliente, domicilio, productos } = req.body;
 
-    // VALIDACIÓN CRÍTICA: Si no hay productos, frenamos antes del Object.values
     if (!productos) {
-      // Puedes redirigir con un mensaje de error si quieres
       return res.status(400).send("No se seleccionaron productos.");
     }
 
     let total = 0;
 
-    // Convertimos lo que venga en un array seguro
     const listaProductos = Object.values(productos);
 
     const productosFinal = listaProductos.map((p) => {
-      // Aseguramos que los valores sean números para evitar NaN
       const precioUnitario = Number(p.precio) || 0;
       const cant = Number(p.cantidad) || 0;
       const subtotal = precioUnitario * cant;

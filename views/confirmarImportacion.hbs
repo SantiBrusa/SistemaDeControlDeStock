@@ -1,8 +1,9 @@
-<div class="container">
-  <h2>Confirmar Productos Extraídos</h2>
-  <p>Revisa que los datos sean correctos antes de guardarlos definitivamente.</p>
-
-  <form action="/importar/confirmar" method="POST">
+<div class="containerConfirm">
+  <div class="titleConfirm">
+    <h2>Confirmar Productos Extraídos</h2>
+    <p>Revisa que los datos sean correctos antes de guardarlos definitivamente.</p>
+  </div>
+  <form action="/importar/confirmar" method="POST" class="formConfirm">
     <table class="table">
       <thead>
         <tr>
@@ -44,7 +45,7 @@
       </tbody>
     </table>
 
-    <div class="actions">
+    <div class="actionsConfirm">
       <a href="/importar" class="btnCancel">Cancelar</a>
       <button type="submit" class="btnForm">
         Guardar en Base de Datos
@@ -52,18 +53,3 @@
     </div>
   </form>
 </div>
-
-<style>
-  .input-edit {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  .actions {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-  }
-</style>

@@ -8,8 +8,6 @@ import Product from "../models/Product.js";
 const router = express.Router();
 const upload = multer({ dest: "uploads/" });
 
-// Inicialización (Asegúrate que el .env esté cargado en app.js)
-
 router.get("/importar", isAuth, (req, res) => {
   res.render("importarProductos");
 });
@@ -23,13 +21,10 @@ router.post(
     const pathImagen = req.file.path;
 
     try {
-      // 1. Inicializar la API
       const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-      // 2. Usar el modelo 1.5-flash (es el estándar actual)
       const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-      // 3. Preparar la imagen
       const imageParts = [
         {
           inlineData: {
@@ -42,12 +37,10 @@ router.post(
       const prompt =
         "Analiza esta imagen y extrae los productos en un array JSON con campos: nombre, precio y stock. Si no hay nada, devuelve [].";
 
-      // 4. Llamada simplificada
       const result = await model.generateContent([prompt, ...imageParts]);
       const response = await result.response;
       const textoJson = response.text();
 
-      // 5. Limpiar y procesar
       const jsonLimpio = textoJson
         .replace(/```json/g, "")
         .replace(/```/g, "")
@@ -61,7 +54,6 @@ router.post(
       console.error("ERROR DETALLADO DE GOOGLE:", error);
       if (fs.existsSync(pathImagen)) fs.unlinkSync(pathImagen);
 
-      // Si vuelve a dar 404, el problema es la API KEY o el modelo no está activo en tu cuenta
       res
         .status(500)
         .send(
@@ -76,7 +68,6 @@ router.post("/importar/confirmar", isAuth, async (req, res) => {
     const { productos } = req.body;
     if (!productos) return res.redirect("/productos");
 
-    // Convertimos a array si viene un solo objeto y mapeamos tipos
     const lista = Array.isArray(productos)
       ? productos
       : Object.values(productos);
