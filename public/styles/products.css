@@ -1,30 +1,25 @@
 /* Productos */
 
 .containerProducts {
-  background-color: #f5f5f5;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 20px;
-  min-height: 100vh;
 }
 
 .containerSearchBar {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: 50px;
 }
 
 .searchForm {
   display: flex;
-  width: 20%;
   gap: 10px;
 }
 
 .searchInput {
-  width: 100%;
-  height: 30px;
+  width: 300px;
   border-radius: 6px;
 }
 

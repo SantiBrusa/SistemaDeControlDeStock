@@ -9,7 +9,7 @@
       <input
         type="text"
         name="search"
-        placeholder="🔍 Buscar producto o marca.."
+        placeholder="🔍 Buscar producto..."
         value="{{search}}"
         class="searchInput"
       />
@@ -17,6 +17,10 @@
       <button class="btn">
         Buscar
       </button>
+
+      {{#if search}}
+        <a href="/productos" class="btn">🔄️</a>
+      {{/if}}
 
     </form>
 
@@ -49,7 +53,7 @@
             <tr class="rowProduct">
 
               <td>{{this.nombre}}</td>
-              <td>{{this.marca}}</td>
+              <td>{{this.marca.nombre}}</td>
               <td>$ {{this.precio}}</td>
 
               <td>

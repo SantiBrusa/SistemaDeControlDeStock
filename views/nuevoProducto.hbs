@@ -1,5 +1,13 @@
 <div class="container">
   <h2>Agregar Producto</h2>
+  {{#if error_msg}}
+    <div
+      style="background-color: #ff4757; color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px; font-weight: bold;"
+    >
+      ⚠️
+      {{error_msg}}
+    </div>
+  {{/if}}
   <form action="/productos/nuevo" method="POST" class="form">
 
     <div class="field">
@@ -8,7 +16,16 @@
     </div>
     <div class="field">
       <label>Marca</label>
-      <input type="text" name="marca" />
+      <select name="marca" id="marca" class="input-edit" required>
+        <option value="" disabled selected>— Seleccione una marca —</option>
+
+        {{#each marcas}}
+          <option value="{{this._id}}">
+            {{this.nombre}}
+          </option>
+        {{/each}}
+
+      </select>
     </div>
     <div class="field">
       <label>Precio</label>

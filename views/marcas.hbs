@@ -1,0 +1,33 @@
+<div class="containerBrands">
+  <div class="titleBrands">
+    <h2>Gestión de Marcas</h2>
+  </div>
+
+  <form action="/marcas" method="POST" class="formInline">
+    <input
+      type="text"
+      name="nombre"
+      placeholder="Nueva marca..."
+      required
+      class="input-edit"
+    />
+    <button type="submit" class="btn">Agregar</button>
+  </form>
+
+  <table class="productTableProduct">
+    <thead>
+      <tr><th>Marca</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+      {{#each marcas}}
+        <tr>
+          <td>{{this.nombre}}</td>
+          <td><a
+              href="/marcas/eliminar/{{this._id}}"
+              class="btnDelete"
+            >Eliminar</a></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

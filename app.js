@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import { engine } from "express-handlebars";
 import session from "express-session";
+import { create } from "express-handlebars";
 import MongoStore from "connect-mongo";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -13,6 +14,7 @@ import authRoutes from "./routes/auth.js";
 import productRoutes from "./routes/products.js";
 import presupuestosRoutes from "./routes/presupuestos.js";
 import importarRoutes from "./routes/importar.js";
+import brandRoutes from "./routes/brands.js";
 
 const app = express();
 
@@ -41,14 +43,22 @@ app.use(express.static(path.join(__dirname, "public")));
 // handlebars
 // ----------------
 
-app.engine(
-  "hbs",
-  engine({
-    extname: ".hbs",
-    defaultLayout: "main",
-    layoutsDir: path.join(__dirname, "views/layouts"),
-  }),
-);
+const hbs = create({
+  extname: ".hbs",
+  defaultLayout: "main",
+  layoutsDir: path.join(__dirname, "views/layouts"), // Agregamos esto aquí
+  helpers: {
+    eq: (a, b) => {
+      if (a && b) {
+        return a.toString() === b.toString();
+      }
+      return false;
+    },
+  },
+});
+
+// USAMOS hbs.engine en lugar de engine()
+app.engine("hbs", hbs.engine);
 
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views"));
@@ -96,6 +106,7 @@ app.use(checkLowStock);
 app.use("/", authRoutes);
 app.use("/", productRoutes);
 app.use("/", presupuestosRoutes);
+app.use("/", brandRoutes);
 app.use(importarRoutes);
 
 // ----------------

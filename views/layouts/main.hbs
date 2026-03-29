@@ -1,6 +1,8 @@
 <html>
   <head>
-    <title>Control de Stock</title>
+    <title>MotoSprint</title>
+    <link rel="icon" type="image/ico" href="/img/motosprint.ico" />
+
     <link rel="stylesheet" href="/styles/styles.css" />
     <link rel="stylesheet" href="/styles/products.css" />
     <link rel="stylesheet" href="/styles/new_editProducts.css" />
@@ -9,6 +11,7 @@
     <link rel="stylesheet" href="/styles/verPresupuestos.css" />
     <link rel="stylesheet" href="/styles/importProd.css" />
     <link rel="stylesheet" href="/styles/confirmProd.css" />
+    <link rel="stylesheet" href="/styles/brands.css" />
   </head>
   <body>
     <div class="layout">
@@ -26,7 +29,7 @@
             <ul class="notification-list">
               {{#each lowStockList}}
                 <li>
-                  <strong>{{this.nombre}}</strong>
+                  <strong>{{this.nombre}} - {{this.marca.nombre}}</strong>
                   <span class="text-danger">Stock: {{this.stock}}</span>
                 </li>
               {{else}}
@@ -43,6 +46,8 @@
         </a>
 
         <a href="/importar" class="navBarLink">Cargar Productos</a>
+
+        <a href="/marcas" class="navBarLink">Gestionar Marcas</a>
 
         <a href="/presupuestos" class="navBarLink">Presupuestos</a>
 

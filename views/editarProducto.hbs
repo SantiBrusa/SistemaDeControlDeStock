@@ -8,7 +8,13 @@
     </div>
     <div class="field">
       <label>Marca</label>
-      <input type="text" name="marca" value="{{producto.marca}}" />
+      <select name="marca" class="input-edit">
+        {{#each marcas}}
+          <option value="{{this._id}}" {{#if (eq ../producto.marca this._id)}}selected{{/if}}>
+            {{this.nombre}}
+          </option>
+        {{/each}}
+      </select>
     </div>
     <div class="field">
       <label>Precio</label>

@@ -4,6 +4,7 @@ import fs from "fs";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { isAuth } from "../middleware/auth.js";
 import Product from "../models/Product.js";
+import Brand from "../models/Brand.js";
 
 const router = express.Router();
 const upload = multer({ dest: "uploads/" });
@@ -49,7 +50,12 @@ router.post(
 
       if (fs.existsSync(pathImagen)) fs.unlinkSync(pathImagen);
 
-      res.render("confirmarImportacion", { productos: productosExtraidos });
+      const marcas = await Brand.find().sort({ nombre: 1 }).lean();
+
+      res.render("confirmarImportacion", {
+        productos: productosExtraidos,
+        marcas: marcas,
+      });
     } catch (error) {
       console.error("ERROR DETALLADO DE GOOGLE:", error);
       if (fs.existsSync(pathImagen)) fs.unlinkSync(pathImagen);
@@ -72,17 +78,35 @@ router.post("/importar/confirmar", isAuth, async (req, res) => {
       ? productos
       : Object.values(productos);
 
-    const productosFinal = lista.map((p) => ({
-      nombre: p.nombre,
-      precio: Number(p.precio) || 0,
-      stock: Number(p.stock) || 0,
-    }));
+    await Promise.all(
+      lista.map(async (p) => {
+        const nombre = p.nombre.trim();
+        const marcaId = p.marca;
+        const nuevoStock = Number(p.stock) || 0;
+        const precio = Number(p.precio) || 0;
 
-    await Product.insertMany(productosFinal);
+        return Product.findOneAndUpdate(
+          {
+            nombre: { $regex: new RegExp(`^${nombre}$`, "i") },
+            marca: marcaId,
+          },
+          {
+            $inc: { stock: nuevoStock },
+            $set: { precio: precio },
+          },
+          {
+            upsert: true,
+            new: true,
+            setDefaultsOnInsert: true,
+          },
+        );
+      }),
+    );
+
     res.redirect("/productos?importado=success");
   } catch (error) {
-    console.error("Error al guardar:", error);
-    res.status(500).send("Error al guardar en la base de datos.");
+    console.error("Error al procesar importación:", error);
+    res.status(500).send("Error al actualizar la base de datos.");
   }
 });
 

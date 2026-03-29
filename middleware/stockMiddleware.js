@@ -5,7 +5,9 @@ export const checkLowStock = async (req, res, next) => {
     try {
       const lowStockProducts = await Product.find({
         stock: { $lt: 10 },
-      }).lean();
+      })
+        .populate("marca")
+        .lean();
 
       res.locals.lowStockCount = lowStockProducts.length;
       res.locals.lowStockList = lowStockProducts;

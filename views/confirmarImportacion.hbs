@@ -8,6 +8,7 @@
       <thead>
         <tr>
           <th>Nombre del Producto</th>
+          <th>Marca</th>
           <th>Precio ($)</th>
           <th>Stock</th>
         </tr>
@@ -22,6 +23,20 @@
                 value="{{this.nombre}}"
                 class="input-edit"
               />
+            </td>
+            <td>
+              <select
+                name="productos[{{@index}}][marca]"
+                class="input-edit"
+                required
+              >
+                <option value="" disabled selected>Elegir marca...</option>
+                  {{#each ../marcas}} 
+                    <option value="{{this._id}}">
+                      {{this.nombre}}
+                    </option>
+                  {{/each}}
+              </select>
             </td>
             <td>
               <input
