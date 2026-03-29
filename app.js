@@ -6,6 +6,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import path from "path";
 import { fileURLToPath } from "url";
+import { checkLowStock } from "./middleware/stockMiddleware.js";
 
 import "./database/mongo.js";
 import authRoutes from "./routes/auth.js";
@@ -91,6 +92,7 @@ app.get("/", (req, res) => {
 // rutas
 // ----------------
 
+app.use(checkLowStock);
 app.use("/", authRoutes);
 app.use("/", productRoutes);
 app.use("/", presupuestosRoutes);

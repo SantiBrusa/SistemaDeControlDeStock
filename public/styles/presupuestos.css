@@ -22,31 +22,10 @@
   background: #f5f5f5;
 }
 
-.btnShow {
-  background: #1f1f1f;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
 .btnPDF {
   background: #666666;
   color: white;
   padding: 6px 10px;
   border-radius: 6px;
   cursor: pointer;
-}
-
-.btnDelete {
-  background: #666666;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.btnDelete:hover {
-  background-color: red;
 }

@@ -85,21 +85,6 @@
   margin: 20px;
 }
 
-.btnSaveBudget {
-  width: fit-content;
-  padding: 5px 15px;
-  background-color: #1f1f1f;
-  color: #f5f5f5;
-  border-radius: 6px;
-  transition: 0.3s;
-  margin: 20px;
-  cursor: pointer;
-}
-
-.btnSaveBudget:hover {
-  background-color: #2a2a2a;
-}
-
 .cont2 {
   grid-column: span 2;
   display: flex;
@@ -129,16 +114,18 @@
   border-radius: 6px;
 }
 
-.searchButtonPres {
-  width: fit-content;
-  padding: 5px 15px;
-  background-color: #1f1f1f;
-  color: #f5f5f5;
-  border-radius: 6px;
-  transition: 0.3s;
-  cursor: pointer;
+.btnsElim {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
-.searchButtonPres:hover {
-  background-color: #2a2a2a;
+.btnsElim button {
+  padding: 5px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.btnsElim button:hover {
+  background-color: red;
 }

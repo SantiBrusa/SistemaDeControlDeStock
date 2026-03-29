@@ -28,34 +28,6 @@
   border-radius: 6px;
 }
 
-.searchButton {
-  width: fit-content;
-  padding: 5px 15px;
-  background-color: #1f1f1f;
-  color: #f5f5f5;
-  border-radius: 6px;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.searchButton:hover {
-  background-color: #2a2a2a;
-}
-
-.addProduct {
-  width: fit-content;
-  padding: 5px 15px;
-  background-color: #1f1f1f;
-  color: #f5f5f5;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.addProduct:hover {
-  background-color: #2a2a2a;
-}
-
 .containerTableProduct {
   width: 90%;
   max-height: 500px;
@@ -98,28 +70,8 @@
   text-decoration: none;
 }
 
-.btnEditProduct {
-  background: #1f1f1f;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.btnEditProduct:hover {
-  background-color: rgb(177, 177, 12);
-}
-
-.btnDeleteProduct {
-  background: #666666;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.btnDeleteProduct:hover {
-  background-color: red;
+.textEmptyProducts {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
 }

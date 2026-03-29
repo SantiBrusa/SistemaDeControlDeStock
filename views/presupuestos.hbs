@@ -1,7 +1,7 @@
 <div class="container">
   <h2>Presupuestos</h2>
 
-  <a href="/presupuestos/nuevo" class="addProduct">Nuevo presupuesto</a>
+  <a href="/presupuestos/nuevo" class="btn">Nuevo presupuesto</a>
 
   <table class="table">
 
@@ -16,11 +16,11 @@
       <tr class="row">
 
         <td>{{this.cliente}}</td>
-        <td>{{this.total}}</td>
+        <td>${{this.total}}</td>
 
         <td class="actions">
 
-          <a href="/presupuestos/ver/{{this._id}}" class="btnShow">
+          <a href="/presupuestos/ver/{{this._id}}" class="btn">
             Ver
           </a>
 
@@ -38,6 +38,15 @@
 
         </td>
 
+      </tr>
+
+    {{else}}
+      <tr>
+        <td colspan="5">
+          <div class="textEmptyProducts">
+            <p>No hay ningun presupuesto cargado, cargalo para verlo aqui!</p>
+          </div>
+        </td>
       </tr>
 
     {{/each}}

@@ -53,9 +53,9 @@ function renderTabla() {
         <td>$${p.precio}</td>
         <td>${p.cantidad}</td>
         <td>$${p.precio * p.cantidad}</td>
-        <td>
-            <button type="button" onclick="restarUno(${i})">❌</button>
-            <button type="button" onclick="eliminarProducto(${i})">🗑</button>
+        <td class="btnsElim">
+            <button type="button" onclick="restarUno(${i})" >-1</button>
+            <button type="button" onclick="eliminarProducto(${i})"  >X</button>
         </td>
     </tr>
 `;

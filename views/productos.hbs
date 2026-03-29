@@ -14,7 +14,7 @@
         class="searchInput"
       />
 
-      <button class="searchButton">
+      <button class="btn">
         Buscar
       </button>
 
@@ -68,20 +68,25 @@
 
               <td class="actions">
 
-                <a href="/productos/editar/{{this._id}}" class="btnEditProduct">
+                <a href="/productos/editar/{{this._id}}" class="btn">
                   Editar
                 </a>
 
-                <a
-                  href="/productos/eliminar/{{this._id}}"
-                  class="btnDeleteProduct"
-                  onclick="return confirm('¿Eliminar Producto?')"
-                >
+                <a href="/productos/eliminar/{{this._id}}" class="btnDelete">
                   Eliminar
                 </a>
 
               </td>
 
+            </tr>
+
+          {{else}}
+            <tr>
+              <td colspan="5">
+                <div class="textEmptyProducts">
+                  <p>No hay ningun producto cargado, cargalos para verlos aqui!</p>
+                </div>
+              </td>
             </tr>
 
           {{/each}}
@@ -95,3 +100,5 @@
   </div>
 
 </div>
+
+<script src="/js/confirmDelete.js"></script>

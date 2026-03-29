@@ -34,6 +34,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 15px;
 }
 
 .field {
@@ -53,7 +54,8 @@
 .field input {
   flex: 1;
   width: 300px;
-  padding: 5px;
+  padding: 10px;
+  border-radius: 6px;
 }
 
 .btnForm {
@@ -67,5 +69,7 @@
 }
 
 .btnForm:hover {
-  background-color: #2a2a2a;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
 }

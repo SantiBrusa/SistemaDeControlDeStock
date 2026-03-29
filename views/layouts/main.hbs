@@ -13,6 +13,28 @@
   <body>
     <div class="layout">
       <nav class="navbar">
+        <div class="notification-container">
+          <a href="#" class="bell-link" id="notificationBell">
+            🔔
+            {{#if hasLowStock}}
+              <span class="badge">{{lowStockCount}}</span>
+            {{/if}}
+          </a>
+
+          <div class="notification-dropdown" id="notificationMenu">
+            <h3>Stock Bajo</h3>
+            <ul class="notification-list">
+              {{#each lowStockList}}
+                <li>
+                  <strong>{{this.nombre}}</strong>
+                  <span class="text-danger">Stock: {{this.stock}}</span>
+                </li>
+              {{else}}
+                <li class="empty-msg">Todo el stock está bien ✅</li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
 
         <a href="/productos" class="navBarLink">Productos</a>
 
@@ -24,12 +46,14 @@
 
         <a href="/presupuestos" class="navBarLink">Presupuestos</a>
 
-        <a href="/logout" class="navBarLink">Cerrar sesión</a>
+        <a href="/logout" class="navBarLink logout-link">Cerrar sesión</a>
 
       </nav>
       <main>
         {{{body}}}
       </main>
     </div>
+
+    <script src="/js/notification.js"></script>
   </body>
 </html>

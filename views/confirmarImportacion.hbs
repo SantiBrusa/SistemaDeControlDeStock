@@ -4,7 +4,7 @@
     <p>Revisa que los datos sean correctos antes de guardarlos definitivamente.</p>
   </div>
   <form action="/importar/confirmar" method="POST" class="formConfirm">
-    <table class="table">
+    <table class="table" id="tableConfirm">
       <thead>
         <tr>
           <th>Nombre del Producto</th>
@@ -40,6 +40,15 @@
                 class="input-edit"
               />
             </td>
+            <td class="text-center">
+              <button
+                type="button"
+                class="btn-remove-row"
+                title="Eliminar de la lista"
+              >
+                🗑️
+              </button>
+            </td>
           </tr>
         {{/each}}
       </tbody>
@@ -47,9 +56,11 @@
 
     <div class="actionsConfirm">
       <a href="/importar" class="btnCancel">Cancelar</a>
-      <button type="submit" class="btnForm">
+      <button type="submit" class="btn">
         Guardar en Base de Datos
       </button>
     </div>
   </form>
 </div>
+
+<script src="/js/confirmImport.js"></script>s

@@ -51,7 +51,7 @@
 
 /* El Botón Mágico */
 .btnFormu {
-  background: linear-gradient(135deg, #4a4952, #6f6e7a);
+  background: #4a4952;
   color: white;
   border: none;
   padding: 12px 20px;
@@ -71,7 +71,9 @@
 .btnFormu:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(216, 216, 219, 0.4);
-  background: linear-gradient(135deg, #4a4952, #6f6e7a);
+  background: #f1f1f1;
+  color: #000000;
+  border: 1px solid #000000;
 }
 
 .btnFormu:active {
