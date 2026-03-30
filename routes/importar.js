@@ -93,10 +93,11 @@ router.post("/importar/confirmar", isAuth, async (req, res) => {
           {
             $inc: { stock: nuevoStock },
             $set: { precio: precio },
+            $setOnInsert: { nombre: nombre },
           },
           {
             upsert: true,
-            new: true,
+            returnDocument: "after",
             setDefaultsOnInsert: true,
           },
         );
