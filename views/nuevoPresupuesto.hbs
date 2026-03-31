@@ -67,21 +67,22 @@
                   type="number"
                   id="cantidad-{{@index}}"
                   min="1"
-                  max="{{this.stock}}"
                   value="1"
                   class="inputStock"
                 />
               </td>
 
               <td>
-                <button
-                  type="button"
-                  onclick="agregarProducto('{{this.nombre}}', {{this.precio}}, {{this.stock}}, {{@index}})"
-                  class="btn"
+                <button 
+                    type="button" 
+                    onclick="agregarProducto('{{this.nombre}}', {{this.precio}}, {{this.stock}}, {{@index}}, '{{this.marca._id}}', '{{this.marca.nombre}}')" 
+                    class="btn {{#if (eq this.stock 0)}}btn-disabled{{/if}}"
+                    {{#if (eq this.stock 0)}}disabled{{/if}}
                 >
-                  Añadir
+                    {{#if (eq this.stock 0)}}Sin Stock{{else}}Añadir{{/if}}
                 </button>
               </td>
+              
 
             </tr>
 
@@ -95,11 +96,12 @@
   <div class="addedProductsContainer">
     <h3>Productos añadidos</h3>
     <div class="containerTable">
-      <table class="table">
+      <table class="tableAvaible">
 
         <thead>
           <tr>
             <th>Nombre</th>
+            <th>Marca</th>
             <th>Precio</th>
             <th>Cantidad</th>
             <th>SubTotal</th>

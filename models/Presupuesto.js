@@ -6,6 +6,12 @@ const productoPresupuestoSchema = new mongoose.Schema({
     required: true,
   },
 
+  marca: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Brand",
+    required: true,
+  },
+
   cantidad: {
     type: Number,
     required: true,
@@ -51,6 +57,12 @@ const presupuestoSchema = new mongoose.Schema({
 
   observaciones: {
     type: String,
+  },
+
+  estado: { 
+    type: String, 
+    enum: ['Pendiente', 'Vendido'], 
+    default: 'Pendiente' 
   },
 });
 

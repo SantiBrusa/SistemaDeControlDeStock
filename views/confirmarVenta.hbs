@@ -1,0 +1,35 @@
+<div class="container" style="padding: 20px; text-align: center; font-family: Arial, sans-serif;">
+    <h2 style="color: #d9534f;">⚠️ ¡Stock Insuficiente!</h2>
+    <p>Los siguientes productos no alcanzan para cubrir el presupuesto:</p>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Marca</th> 
+                <th>Pedido</th>
+                <th>Disponible</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each productosFaltantes}}
+            <tr>
+                <td>{{this.nombre}}</td>
+                <td>{{this.marcaNombre}}</td>
+                <td>{{this.pedido}} unidades</td>
+                <td style="color: #d9534f;">{{this.disponible}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <div style="margin-top: 30px; display: flex; justify-content: center; gap: 15px;">
+        <a href="/presupuestos" class="btn">
+            ❌ Cancelar y Volver
+        </a>
+        
+        <a href="/presupuestos/vender/{{id}}?forzar=true" class="btn">
+            ✅ Vender igual (Dejar en 0)
+        </a>
+    </div>
+</div>

@@ -23,7 +23,7 @@ router.get("/presupuestos", isAuth, async (req, res) => {
 // ----------------
 
 router.get("/presupuestos/nuevo", isAuth, async (req, res) => {
-  const productos = await Product.find().lean();
+  const productos = await Product.find().populate("marca").lean();
 
   res.render("nuevoPresupuesto", {
     productos,
@@ -55,6 +55,7 @@ router.post("/presupuestos/nuevo", isAuth, async (req, res) => {
 
       return {
         nombre: p.nombre,
+        marca: p.marca,
         cantidad: cant,
         precio: precioUnitario,
         subtotal: subtotal,
@@ -80,7 +81,9 @@ router.post("/presupuestos/nuevo", isAuth, async (req, res) => {
 // ----------------
 
 router.get("/presupuestos/ver/:id", isAuth, async (req, res) => {
-  const presupuesto = await Presupuesto.findById(req.params.id).lean();
+  const presupuesto = await Presupuesto.findById(req.params.id)
+    .populate("productos.marca")
+    .lean();
 
   presupuesto.fechaFormateada = new Date(presupuesto.fecha).toLocaleDateString(
     "es-AR",
@@ -99,6 +102,62 @@ router.get("/presupuestos/pdf/:id", isAuth, async (req, res) => {
   const presupuesto = await Presupuesto.findById(req.params.id).lean();
 
   generarPDF(presupuesto, res);
+});
+
+router.get("/presupuestos/vender/:id", isAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { forzar } = req.query; 
+
+    const presupuesto = await Presupuesto.findById(id).populate("productos.marca").lean();
+    if (!presupuesto) return res.status(404).send("Presupuesto no encontrado");
+
+    let productosFaltantes = [];
+    let actualizaciones = [];
+
+    for (const item of presupuesto.productos) {
+      const productoDB = await Product.findOne({ 
+        nombre: item.nombre, 
+        marca: item.marca._id
+      });
+
+      if (!productoDB) continue;
+
+      if (productoDB.stock < item.cantidad && !forzar) {
+        productosFaltantes.push({
+          nombre: item.nombre,
+          marcaNombre: item.marca.nombre,
+          pedido: item.cantidad,
+          disponible: productoDB.stock
+        });
+      }
+
+      actualizaciones.push({
+        id: productoDB._id,
+        cantidadVenta: item.cantidad,
+        stockActual: productoDB.stock
+      });
+    }
+
+    if (productosFaltantes.length > 0) {
+      return res.render("confirmarVenta", {
+        id,
+        productosFaltantes
+      });
+    }
+
+    for (const act of actualizaciones) {
+      let nuevoStock = Math.max(0, act.stockActual - act.cantidadVenta);
+      await Product.findByIdAndUpdate(act.id, { stock: nuevoStock });
+    }
+
+    await Presupuesto.findByIdAndUpdate(id, { estado: 'Vendido' });
+
+    res.redirect("/presupuestos");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al procesar la venta.");
+  }
 });
 
 // ELIMINAR PRESUPUESTO

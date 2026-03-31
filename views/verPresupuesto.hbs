@@ -30,7 +30,13 @@
 
         <tr>
           <td>{{this.nombre}}</td>
-          <td>{{this.marca.nombre}}</td>
+          <td>
+            {{#if this.marca}}
+              {{this.marca.nombre}}
+            {{else}}
+              ---
+            {{/if}}
+          </td>
           <td>{{this.cantidad}}</td>
           <td>${{this.precio}}</td>
           <td>${{this.subtotal}}</td>

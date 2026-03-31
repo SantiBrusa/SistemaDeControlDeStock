@@ -26,6 +26,14 @@
             Ver
           </a>
 
+          {{#if (eq this.estado "Vendido")}}
+            <button class="btn btn-disabled" disabled>✅ Vendido</button>
+          {{else}}
+            <button onclick="confirmarVenta('{{this._id}}')" class="btn btn-vender">
+              Vender
+            </button>
+          {{/if}}
+
           <a
             href="/presupuestos/eliminar/{{this._id}}"
             class="btnDelete"
@@ -51,3 +59,12 @@
 
   </table>
 </div>
+
+<script>
+  function confirmarVenta(id) { 
+    if (!id) return alert("Error: ID no encontrado"); 
+  if (confirm("¿Concretar venta? Se descontará el stock de los productos.")) { 
+    window.location.href = "/presupuestos/vender/" + id; 
+    } 
+  }
+</script>

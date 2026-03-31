@@ -46,18 +46,14 @@ app.use(express.static(path.join(__dirname, "public")));
 const hbs = create({
   extname: ".hbs",
   defaultLayout: "main",
-  layoutsDir: path.join(__dirname, "views/layouts"), // Agregamos esto aquí
+  layoutsDir: path.join(__dirname, "views/layouts"),
   helpers: {
-    eq: (a, b) => {
-      if (a && b) {
-        return a.toString() === b.toString();
-      }
-      return false;
+    eq: function (a, b) {
+      return String(a) === String(b);
     },
   },
 });
 
-// USAMOS hbs.engine en lugar de engine()
 app.engine("hbs", hbs.engine);
 
 app.set("view engine", "hbs");
