@@ -20,6 +20,7 @@ router.post("/login", async (req, res) => {
 
   if (!user) {
     return res.render("login", {
+      layout: "login",
       error: "Usuario no encontrado",
     });
   }
