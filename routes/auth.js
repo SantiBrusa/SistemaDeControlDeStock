@@ -29,6 +29,7 @@ router.post("/login", async (req, res) => {
 
   if (!match) {
     return res.render("login", {
+      layout: "login",
       error: "Contraseña incorrecta",
     });
   }
