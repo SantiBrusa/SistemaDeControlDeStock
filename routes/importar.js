@@ -63,7 +63,7 @@ router.post(
       res
         .status(500)
         .send(
-          "Error de comunicación con la IA. Verifica tu API Key en el archivo .env",
+          "Error de comunicación con la IA. Puede que hallas alcanzado el maximo de peticiones diario.",
         );
     }
   },

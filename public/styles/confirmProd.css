@@ -14,13 +14,40 @@
 }
 
 .formConfirm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: max-content;
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tableConfirm {
+  border-collapse: collapse;
+  background: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tableConfirm th {
+  background: #111111;
+  color: white;
+  padding: 15px 30px;
+  text-align: left;
+}
+
+.tableConfirm td {
+  padding: 15px 30px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.rowConfirm:hover {
+  background: #f5f5f5;
 }
 
 .input-edit {
-  width: 100%;
+  width: auto;
   padding: 5px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -28,6 +55,7 @@
 .actionsConfirm {
   margin-top: 30px;
   display: flex;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -43,4 +71,50 @@
 
 .btnCancel:hover {
   background-color: red;
+}
+
+.btn-remove-row {
+  align-content: center;
+}
+
+@media screen and (max-width: 1366px) {
+  .containerConfirm {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido */
+    padding: 0 20px;
+  }
+
+  .titleConfirm {
+    margin-top: 20px; /* Reducimos margen superior por la poca altura de pantalla */
+    gap: 10px;
+  }
+
+  .formConfirm {
+    width: 95% !important; /* Usamos porcentaje para mayor flexibilidad */
+    max-width: 1100px; /* Evita que se estire demasiado en pantallas anchas */
+    max-height: 400px; /* Reducimos la altura máxima para que no choque con el fondo */
+    overflow-x: auto; /* Permite scroll horizontal si la tabla es muy ancha */
+  }
+
+  .tableConfirm {
+    width: 100%;
+    font-size: 14px; /* Bajamos un poco el tamaño de letra */
+  }
+
+  .tableConfirm th, 
+  .tableConfirm td {
+    padding: 10px 15px; /* Reducimos el padding de 15px 30px a algo más compacto */
+  }
+
+  .input-edit {
+    width: 100%; /* El input ocupa el ancho de su celda */
+    max-width: 200px; /* Pero con un tope para que no se vea gigante */
+    box-sizing: border-box;
+  }
+
+  .actionsConfirm {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 }

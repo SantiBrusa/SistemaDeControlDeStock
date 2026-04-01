@@ -4,18 +4,19 @@
     <p>Revisa que los datos sean correctos antes de guardarlos definitivamente.</p>
   </div>
   <form action="/importar/confirmar" method="POST" class="formConfirm">
-    <table class="table" id="tableConfirm">
+    <table class="tableConfirm" id="tableConfirm">
       <thead>
         <tr>
           <th>Nombre del Producto</th>
           <th>Marca</th>
           <th>Precio ($)</th>
           <th>Stock</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
         {{#each productos}}
-          <tr>
+          <tr class="rowConfirm">
             <td>
               <input
                 type="text"
@@ -55,7 +56,7 @@
                 class="input-edit"
               />
             </td>
-            <td class="text-center">
+            <td>
               <button
                 type="button"
                 class="btn-remove-row"
@@ -78,4 +79,4 @@
   </form>
 </div>
 
-<script src="/js/confirmImport.js"></script>s
+<script src="/js/confirmImport.js"></script>
