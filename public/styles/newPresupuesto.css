@@ -1,153 +1,131 @@
+
 .containerNewPres {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr; 
+  gap: 20px;
+  padding: 20px;
+  max-width: 1600px; 
+  margin: 0 auto;
 }
 
 .cont1 {
   grid-column: span 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-  margin-left: 100px;
+  margin-left: 0; 
+  padding: 0 40px;
 }
 
-.containerNewPres h2 {
-  margin-top: 5%;
+.cont1 h2 { margin-bottom: 20px; }
+
+.cont1 .field {
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 15px;
 }
 
-.inputStock {
-  padding: 5px;
-  border-radius: 6px;
-}
-
-.avaibleProductsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  margin: 20px;
-}
-
-.containerTable {
-  max-width: 800px;
-  max-height: 350px;
-  overflow-y: auto;
-  margin-left: 10px;
-  overflow-x: hidden;
-}
-
-.containerTable thead th {
-  position: sticky;
-  top: 0;
-}
-
-.containerTable td:first-child {
-  max-width: 150px;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  white-space: normal;
-  line-height: 1.2;
-  text-align: left;
-}
-
-.containerTable td {
-  white-space: normal;
-}
-
-.tableAvaible {
-  width: 60%;
-  border-collapse: collapse;
-  background: #ffffff;
-  font-size: 9pt;
-}
-
-.tableAvaible th {
-  background: #111111;
-  color: white;
-  padding: 15px 30px;
-  text-align: left;
-}
-
-.tableAvaible td {
-  padding: 15px 30px;
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.rowAvaible:hover {
-  background: #f5f5f5;
-}
-
+.avaibleProductsContainer, 
 .addedProductsContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  margin: 20px;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.containerTable {
+  width: 100%;
+  max-height: 450px; 
+  overflow-y: auto;
+  overflow-x: auto; 
+}
+
+.tableAvaible {
+  width: 100%; 
+  border-collapse: collapse;
+  background: #ffffff;
+  font-size: 10pt; 
+}
+
+.tableAvaible th, .tableAvaible td {
+  padding: 12px 15px; 
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.tableAvaible thead th {
+  color: #e5e5e5;
+  position: sticky;
+  top: 0;
+  background: #111;
+  z-index: 10;
 }
 
 .cont2 {
   grid-column: span 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  border-top: 2px solid #333;
 }
 
-.contSearchBar {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  margin-top: auto;
-  margin-bottom: auto;
+.aviso-flotante {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff3cd; 
+    color: #856404;
+    padding: 12px 25px;
+    border: 1px solid #ffeeba;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 9999;
+    font-weight: bold;
+    font-size: 0.9rem;
+    
+    /* Animación de entrada/salida */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    pointer-events: none; /* Evita que el mouse choque con el cartel invisible */
+}
+
+/* Clase que activaremos con JS */
+.aviso-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-10px);
+    pointer-events: auto;
+}
+
+/* Ajuste para 1366x768 (Notebooks) */
+@media screen and (max-width: 1400px) {
+  .containerNewPres {
+    grid-template-columns: 1fr; 
+  }
+
+  .avaibleProductsContainer, 
+  .addedProductsContainer {
+    grid-column: span 2; 
+  }
+
+  .containerTable {
+    max-height: 300px; 
+  }
+}
+
+/* Ajustes para monitores de 1920x1080 */
+@media screen and (min-width: 1401px) {
+  .containerTable {
+    max-height: 550px; 
+  }
+}
+
+.inputStock {
+  width: 60px;
+  padding: 5px;
+  text-align: center;
 }
 
 .searchFormPres {
   display: flex;
-  width: 80%;
-  gap: 10px;
-}
-
-.searchInputPres {
   width: 100%;
-  height: 30px;
-  border-radius: 6px;
-}
-
-.btnsElim {
-  display: flex;
-  justify-content: center;
   gap: 10px;
-}
-
-.btnsElim button {
-  padding: 5px;
-  border-radius: 6px;
-  transition: 0.3s;
-}
-
-.btnsElim button:hover {
-  background-color: red;
-}
-
-.btn-disabled {
-    background-color: #d3d3d3 !important; 
-    color: #888888 !important;         
-    cursor: not-allowed;               
-    border: 1px solid #999;
-    pointer-events: none;             
-    opacity: 0.6;                      
-}
-
-@media screen and (max-width: 1366px) {
-  .containerNewPres {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .cont1{
-    grid-column: auto;
-  }
+  margin-bottom: 10px;
 }

@@ -76,11 +76,8 @@
                 <button 
                     type="button" 
                     onclick="agregarProducto('{{this.nombre}}', {{this.precio}}, {{this.stock}}, {{@index}}, '{{this.marca._id}}', '{{this.marca.nombre}}')" 
-                    class="btn {{#if (eq this.stock 0)}}btn-disabled{{/if}}"
-                    {{#if (eq this.stock 0)}}disabled{{/if}}
-                >
-                    {{#if (eq this.stock 0)}}Sin Stock{{else}}Añadir{{/if}}
-                </button>
+                    class="btn"
+                >Añadir</button>
               </td>
               
 
@@ -125,6 +122,9 @@
     </button>
   </div>
 
+  <div id="aviso-stock" class="aviso-flotante">
+    ⚠️ Estás agregando productos sin stock al presupuesto.
+  </div>
 </form>
 
 <script src="/js/presupuesto.js"></script>

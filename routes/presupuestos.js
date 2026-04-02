@@ -99,9 +99,18 @@ router.get("/presupuestos/ver/:id", isAuth, async (req, res) => {
 // ----------------
 
 router.get("/presupuestos/pdf/:id", isAuth, async (req, res) => {
-  const presupuesto = await Presupuesto.findById(req.params.id).lean();
+  try {
+    const presupuesto = await Presupuesto.findById(req.params.id)
+      .populate("productos.marca") 
+      .lean();
 
-  generarPDF(presupuesto, res);
+    if (!presupuesto) return res.redirect("/presupuestos");
+
+    generarPDF(presupuesto, res);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al generar el PDF");
+  }
 });
 
 router.get("/presupuestos/vender/:id", isAuth, async (req, res) => {

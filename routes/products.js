@@ -12,16 +12,14 @@ router.get("/productos", isAuth, async (req, res) => {
   try {
     let productos = await Product.find()
       .populate("marca")
-      .sort({ nombre: 1 })
+      .sort({ nombre: 1 }) 
       .lean();
 
     if (search) {
-      const termino = search.toLowerCase();
+      const termino = search.toUpperCase(); 
       productos = productos.filter((p) => {
-        const coincideNombre = p.nombre.toLowerCase().includes(termino);
-        const coincideMarca =
-          p.marca && p.marca.nombre.toLowerCase().includes(termino);
-
+        const coincideNombre = p.nombre.includes(termino);
+        const coincideMarca = p.marca && p.marca.nombre.toUpperCase().includes(termino);
         return coincideNombre || coincideMarca;
       });
     }
@@ -47,24 +45,24 @@ router.post("/productos/nuevo", isAuth, async (req, res) => {
   const { nombre, marca, precio, stock } = req.body;
 
   try {
-    const nombreTrim = nombre.trim();
+    const nombreNormalizado = nombre.trim().toUpperCase();
 
     const productoExistente = await Product.findOne({
-      nombre: { $regex: new RegExp(`^${nombreTrim}$`, "i") },
+      nombre: { $regex: new RegExp(`^${nombreNormalizado}$`, "i") },
       marca: marca,
     });
 
     if (productoExistente) {
       const marcas = await Brand.find().sort({ nombre: 1 }).lean();
       return res.render("nuevoProducto", {
-        error_msg: `El producto "${nombreTrim}" ya existe para esta marca.`,
+        error_msg: `El producto "${nombreNormalizado}" ya existe para esta marca.`,
         marcas,
         datos: req.body,
       });
     }
 
     await Product.create({
-      nombre: nombreTrim,
+      nombre: nombreNormalizado, 
       marca,
       precio: Number(precio) || 0,
       stock: Number(stock) || 0,
@@ -91,14 +89,19 @@ router.get("/productos/editar/:id", isAuth, async (req, res) => {
 router.post("/productos/editar/:id", isAuth, async (req, res) => {
   const { nombre, marca, precio, stock } = req.body;
 
-  await Product.findByIdAndUpdate(req.params.id, {
-    nombre,
-    marca,
-    precio,
-    stock,
-  });
+  try {
+    await Product.findByIdAndUpdate(req.params.id, {
+      nombre: nombre.trim().toUpperCase(), 
+      marca,
+      precio,
+      stock,
+    });
 
-  res.redirect("/productos");
+    res.redirect("/productos");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al editar el producto.");
+  }
 });
 
 // --- ELIMINAR PRODUCTO ---
