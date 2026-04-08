@@ -37,6 +37,8 @@ SESSION_SECRET=tu_secreto_para_sesiones
 
 Nota: La GEMINI_API_KEY es fundamental para que el módulo de importación procese las fotos de los productos.
 
+---
+
 ⚙️ Instalación
 1. Clona el proyecto:
 
