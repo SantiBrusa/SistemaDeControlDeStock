@@ -65,7 +65,7 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(
   session({
-    secret: "secreto",
+    secret: process.env.SESSION_SECRET || "defaultSecret",
     resave: false,
     saveUninitialized: false,
 
