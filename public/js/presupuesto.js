@@ -6,21 +6,17 @@ window.agregarProducto = function (nombre, precio, stock, index, marcaId, marcaN
 
   if (!cantidad || cantidad <= 0) return;
 
-  // --- LÓGICA DEL AVISO TEMPORAL ---
   if (stock <= 0 || cantidad > stock) {
     const divAviso = document.getElementById("aviso-stock");
     
-    // 1. Lo mostramos agregando la clase de CSS
     divAviso.classList.add("aviso-visible");
-    divAviso.style.display = "block"; // Aseguramos que no esté en none
+    divAviso.style.display = "block"; 
 
-    // 2. Lo ocultamos automáticamente después de 3 segundos (3000ms)
     setTimeout(() => {
         divAviso.classList.remove("aviso-visible");
     }, 3000);
   }
 
-  // Lógica de siempre para añadir al array...
   const productoExistente = productosAñadidos.find(
     (p) => p.nombre === nombre && p.marcaId === marcaId
   );

@@ -81,20 +81,60 @@
     font-weight: bold;
     font-size: 0.9rem;
     
-    /* Animación de entrada/salida */
     transition: opacity 0.5s ease, transform 0.5s ease;
     opacity: 0;
-    pointer-events: none; /* Evita que el mouse choque con el cartel invisible */
+    pointer-events: none; 
 }
 
-/* Clase que activaremos con JS */
 .aviso-visible {
     opacity: 1;
     transform: translateX(-50%) translateY(-10px);
     pointer-events: auto;
 }
 
-/* Ajuste para 1366x768 (Notebooks) */
+.btnsElim {
+  gap: 5px;
+  text-align: center;
+}
+
+.btn-res {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #111111;
+  color: #ffffff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border: 1px solid #111111;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-res:hover {
+  background-color: #ffffff;
+  color: #111111;
+}
+
+.btn-del {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #111111;
+  color: #ffffff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border: 1px solid #111111;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-del:hover {
+  background-color: #ffffff;
+  color: #111111;
+}
+
 @media screen and (max-width: 1400px) {
   .containerNewPres {
     grid-template-columns: 1fr; 
@@ -110,7 +150,6 @@
   }
 }
 
-/* Ajustes para monitores de 1920x1080 */
 @media screen and (min-width: 1401px) {
   .containerTable {
     max-height: 550px; 
